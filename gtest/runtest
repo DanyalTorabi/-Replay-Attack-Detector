@@ -1,0 +1,4 @@
+#!/bin/bash
+
+make clean all && ./build_make/run_test_cases $1 $2 $3
+

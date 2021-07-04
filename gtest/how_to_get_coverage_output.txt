@@ -1,0 +1,30 @@
+# Install the tools.
+
+sudo apt install lcov gcovr
+
+# Add it to make command.
+-fprofile-arcs -ftest-coverage
+## Ex:
+GCOVERAGE = -fprofile-arcs -ftest-coverage
+
+$(TARGET): $(OBJS) 
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(TARGET) $(GCOVERAGE) $(OBJS) $(LFLAGS) $(LIBS)
+
+# Run your test.
+make clean all
+./test
+
+# If you received an error contained version mismatch like "Version mismatch - expected 9.3 (release) (A93*) got 7.3 (release) (A73*)" remove all .gcno and .gcda files.
+# If the test completed (It is not matter the result), both .gcno and .gcda files are generated.
+
+# Pass the test file to gcov.
+gcov main.cpp
+
+lcov --coverage --directory . --output-file main_coverage.info
+# or
+#lcov --capture --directory . --output-file main_coverage.info
+
+# Generating html output file to out directory.
+genhtml main_coverage.info --output-directory out
+
+#Good luck

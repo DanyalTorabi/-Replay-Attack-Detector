@@ -1,0 +1,7 @@
+*.o
+*.swp
+/qt_test/build/
+gtest/build_cmake/*
+gtest/build_make/*
+gtest/out/*
+*.gcov
